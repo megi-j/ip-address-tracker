@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ArrowBox = styled.div`
+export const ArrowBox = styled.button`
   width: 10%;
   height: 100%;
   background-color: #000;
