@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-export const InputBox = styled.div`
-  width: 555px;
-  height: 58px;
+export const ResultBox = styled.div`
+  max-width: 1110px;
+  width: 100%;
+  height: 161px;
   border-radius: 15px;
   background-color: #fff;
+  box-shadow: 0px 50px 50px -25px rgba(0, 0, 0, 0.0983665);
   position: absolute;
   left: 50%;
-  top: 94px;
   transform: translate(-50%);
+  bottom: -80px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 50px 50px -25px rgba(0, 0, 0, 0.0983665);
+  align-items: center;
 `;
