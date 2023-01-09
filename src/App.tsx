@@ -11,6 +11,9 @@ import { InfoBox } from "./InfoBox";
 import { InfoTitle } from "./InfoTitle";
 import { BgImage } from "./BgImage";
 import { useEffect, useState } from "react";
+import "leaflet/dist/leaflet.css";
+
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 const GlobalStyles = createGlobalStyle`
   *{
     font-family: 'Rubik';
@@ -30,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
 function App() {
   const [ipInputValue, setIpInputValue] = useState<any>(undefined);
   const [ipAdress, setIpAdress] = useState<any>("8.8.8.8");
-  const [result, setResult] = useState<any>(undefined);
+  const [result, setResult] = useState<any>();
   const [fetched, setFetched] = useState<boolean>(false);
 
   function handleSubmit(e: any) {
@@ -42,7 +45,7 @@ function App() {
   }
   useEffect(() => {
     fetch(
-      `https://geo.ipify.org/api/v2/country?apiKey=at_KbAeCBdxKOPAmCnlok7IxErzSjMrG&ipAddress=${ipAdress}`
+      `https://geo.ipify.org/api/v1?apiKey=at_moiOBACOKKyPhePH3BfUSWTGsnB3F&ipAddress=${ipAdress}`
     )
       .then((response) => response.json())
       .then((res) => {
@@ -51,6 +54,7 @@ function App() {
         console.log(res);
       });
   }, [ipAdress]);
+  // console.log(result.location);
   return (
     <Container>
       <GlobalStyles />
@@ -89,6 +93,31 @@ function App() {
           </InfoBox>
         </ResultBox>
       </HeaderBox>
+      {result !== undefined ? (
+        <MapContainer
+          style={{
+            width: "100%",
+            height: "100%",
+            marginTop: 0,
+            border: "5px solid blue",
+            zIndex: 0,
+          }}
+          key={JSON.stringify([result.location.lat, result.location.lng])}
+          center={[result.location.lat, result.location.lng]}
+          zoom={13}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <Marker
+            position={[result.location.lat, result.location.lng]}
+          ></Marker>
+        </MapContainer>
+      ) : (
+        ""
+      )}
     </Container>
   );
 }
