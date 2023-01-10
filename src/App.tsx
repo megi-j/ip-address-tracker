@@ -29,6 +29,12 @@ const GlobalStyles = createGlobalStyle`
     padding: 24px;
     font-weight: 400;
   }
+  @media(max-width: 375px){
+    ::placeholder{
+      padding: 0;
+      font-size: 15px;
+    }
+  }
 `;
 
 function App() {
@@ -51,7 +57,12 @@ function App() {
       .then((response) => response.json())
       .then((res) => {
         setResult(res);
-        setFetched(true);
+        if (res.message) {
+          setFetched(false);
+        } else {
+          setFetched(true);
+        }
+
         console.log(res);
       });
   }, [ipAdress]);

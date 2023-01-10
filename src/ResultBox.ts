@@ -15,4 +15,10 @@ export const ResultBox = styled.div`
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  @media (max-width: 375px) {
+    width: 87%;
+    height: 294px;
+    bottom: -147px;
+    flex-direction: column;
+  }
 `;

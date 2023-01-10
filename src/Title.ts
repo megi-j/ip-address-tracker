@@ -9,4 +9,9 @@ export const Title = styled.h1`
   left: 50%;
   transform: translate(-50%);
   top: 33px;
+  line-height: 30px;
+  @media (max-width: 375px) {
+    font-size: 20px;
+    letter-spacing: -0.232143px;
+  }
 `;

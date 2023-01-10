@@ -8,4 +8,9 @@ export const InfoTitle = styled.h3`
   opacity: 0.5;
   text-transform: uppercase;
   margin-bottom: 13px;
+  @media (max-width: 375px) {
+    font-size: 10px;
+    letter-spacing: 1.45833px;
+    margin-bottom: 7px;
+  }
 `;

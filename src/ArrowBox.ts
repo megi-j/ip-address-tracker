@@ -12,4 +12,7 @@ export const ArrowBox = styled.button`
   &:hover {
     background-color: #3f3f3f;
   }
+  @media (max-width: 375px) {
+    width: 58px;
+  }
 `;
