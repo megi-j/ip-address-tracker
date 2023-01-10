@@ -12,8 +12,15 @@ import { InfoTitle } from "./InfoTitle";
 import { BgImage } from "./BgImage";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-
+import marker from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import L from "leaflet";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
+
+const markerIcon = L.icon({
+  iconUrl: marker,
+  shadowUrl: markerShadow,
+});
 const GlobalStyles = createGlobalStyle`
   *{
     font-family: 'Rubik';
@@ -113,6 +120,7 @@ function App() {
           />
           <Marker
             position={[result.location.lat, result.location.lng]}
+            icon={markerIcon}
           ></Marker>
         </MapContainer>
       ) : (
