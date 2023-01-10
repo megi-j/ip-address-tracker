@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import Map from "./Map";
 import { InfoText } from "./InfoText";
 import { Helmet } from "react-helmet";
+import { resultType } from "./types";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -38,12 +39,12 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 function App() {
-  const [ipInputValue, setIpInputValue] = useState<any>(undefined);
-  const [ipAdress, setIpAdress] = useState<any>("8.8.8.8");
-  const [result, setResult] = useState<any>();
+  const [ipInputValue, setIpInputValue] = useState<string>("");
+  const [ipAdress, setIpAdress] = useState<string>("8.8.8.8");
+  const [result, setResult] = useState<resultType>();
   const [fetched, setFetched] = useState<boolean>(false);
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setIpAdress(ipInputValue);
@@ -95,19 +96,19 @@ function App() {
         <ResultBox>
           <InfoBox>
             <InfoTitle>IP Address</InfoTitle>
-            <InfoText>{fetched ? result.ip : ""}</InfoText>
+            <InfoText>{fetched ? result?.ip : ""}</InfoText>
           </InfoBox>
           <InfoBox>
             <InfoTitle>location</InfoTitle>
-            <InfoText>{fetched ? result.location.region : ""}</InfoText>
+            <InfoText>{fetched ? result?.location.region : ""}</InfoText>
           </InfoBox>
           <InfoBox>
             <InfoTitle>timezone</InfoTitle>
-            <InfoText>{fetched ? result.location.timezone : ""}</InfoText>
+            <InfoText>{fetched ? result?.location.timezone : ""}</InfoText>
           </InfoBox>
           <InfoBox>
             <InfoTitle>isp</InfoTitle>
-            <InfoText>{fetched ? result.isp : ""}</InfoText>
+            <InfoText>{fetched ? result?.isp : ""}</InfoText>
           </InfoBox>
         </ResultBox>
       </HeaderBox>

@@ -8,7 +8,11 @@ const markerIcon = L.icon({
   iconUrl: marker,
   shadowUrl: markerShadow,
 });
-export default function Map(props: any) {
+type Props = {
+  lat: number;
+  lng: number;
+};
+export default function Map(props: Props) {
   return (
     <MapContainer
       style={{
