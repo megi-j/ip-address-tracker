@@ -8,4 +8,5 @@ export const Title = styled.h1`
   position: absolute;
   left: 50%;
   transform: translate(-50%);
+  top: 33px;
 `;

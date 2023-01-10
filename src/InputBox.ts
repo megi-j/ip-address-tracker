@@ -7,7 +7,7 @@ export const InputBox = styled.div`
   background-color: #fff;
   position: absolute;
   left: 50%;
-  top: 94px;
+  top: 130px;
   transform: translate(-50%);
   display: flex;
   justify-content: space-between;

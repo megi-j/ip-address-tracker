@@ -7,4 +7,5 @@ export const InfoTitle = styled.h3`
   color: #2c2c2c;
   opacity: 0.5;
   text-transform: uppercase;
+  margin-bottom: 13px;
 `;

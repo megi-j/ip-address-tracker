@@ -11,16 +11,10 @@ import { InfoBox } from "./InfoBox";
 import { InfoTitle } from "./InfoTitle";
 import { BgImage } from "./BgImage";
 import { useEffect, useState } from "react";
-import "leaflet/dist/leaflet.css";
-import marker from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import L from "leaflet";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import Map from "./Map";
+import { InfoText } from "./InfoText";
+import { Helmet } from "react-helmet";
 
-const markerIcon = L.icon({
-  iconUrl: marker,
-  shadowUrl: markerShadow,
-});
 const GlobalStyles = createGlobalStyle`
   *{
     font-family: 'Rubik';
@@ -65,6 +59,12 @@ function App() {
   return (
     <Container>
       <GlobalStyles />
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
       <HeaderBox>
         <BgImage src={bg} alt="bg" />
         <Title>IP Address Tracker</Title>
@@ -84,45 +84,24 @@ function App() {
         <ResultBox>
           <InfoBox>
             <InfoTitle>IP Address</InfoTitle>
-            <p>{fetched ? result.ip : ""}</p>
+            <InfoText>{fetched ? result.ip : ""}</InfoText>
           </InfoBox>
           <InfoBox>
             <InfoTitle>location</InfoTitle>
-            <p>{fetched ? result.location.region : ""}</p>
+            <InfoText>{fetched ? result.location.region : ""}</InfoText>
           </InfoBox>
           <InfoBox>
             <InfoTitle>timezone</InfoTitle>
-            <p>{fetched ? result.location.timezone : ""}</p>
+            <InfoText>{fetched ? result.location.timezone : ""}</InfoText>
           </InfoBox>
           <InfoBox>
             <InfoTitle>isp</InfoTitle>
-            <p>{fetched ? result.isp : ""}</p>
+            <InfoText>{fetched ? result.isp : ""}</InfoText>
           </InfoBox>
         </ResultBox>
       </HeaderBox>
       {result !== undefined ? (
-        <MapContainer
-          style={{
-            width: "100%",
-            height: "100%",
-            marginTop: 0,
-            border: "5px solid blue",
-            zIndex: 0,
-          }}
-          key={JSON.stringify([result.location.lat, result.location.lng])}
-          center={[result.location.lat, result.location.lng]}
-          zoom={13}
-          scrollWheelZoom={true}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <Marker
-            position={[result.location.lat, result.location.lng]}
-            icon={markerIcon}
-          ></Marker>
-        </MapContainer>
+        <Map lat={result.location.lat} lng={result.location.lng} />
       ) : (
         ""
       )}
@@ -137,5 +116,4 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  border: 1px solid red;
 `;
